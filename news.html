@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head> <meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ข่าว/ประกาศ | คณะสาธารณสุขศาสตร์</title>
+<meta content="ข่าวสารและประกาศจากคณะสาธารณสุขศาสตร์" name="description"/>
+<link href="./assets/favicon.png" rel="icon"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              "Inter",
+              "Noto Sans Thai",
+              "ui-sans-serif",
+              "system-ui",
+              "-apple-system",
+              "Segoe UI",
+              "Roboto",
+              "Helvetica",
+              "Arial",
+              "sans-serif"
+            ]
+          }
+        }
+      }
+    };
+  </script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    .primary-nav {
+      gap: 2rem;
+    }
+    .primary-nav .nav-item {
+      position: relative;
+    }
+    .primary-nav a {
+      position: relative;
+      padding-bottom: 2px;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.2s ease;
+      font-weight: 600;
+    }
+    .primary-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      background: #f97316;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+    .primary-nav a:hover {
+      color: #fff;
+    }
+    .primary-nav a:hover::after,
+    .primary-nav a.active::after {
+      transform: scaleX(1);
+    }
+    .primary-nav a.active {
+      color: #fff;
+    }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      min-width: 11rem;
+      background: #fff;
+      color: #0f172a;
+      border-radius: 0.9rem;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+      padding: 0.5rem 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 50;
+    }
+    .primary-nav .nav-item:hover .nav-dropdown {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-dropdown a {
+      display: flex;
+      align-items: center;
+      padding: 0.45rem 1rem;
+      color: #0f172a;
+      gap: 0.4rem;
+      opacity: 0.85;
+    }
+    .nav-dropdown a:hover {
+      background: rgba(15, 23, 42, 0.04);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-900"> <!-- Navigation -->
+<header class="sticky top-0 z-50">
+<div class="bg-[#1D4699] text-white shadow">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-orange-400 via-pink-500 to-purple-500 grid place-items-center text-lg font-semibold">
+            ส
+          </div>
+<div class="leading-tight">
+<div class="font-semibold text-lg">คณะสาธารณสุขศาสตร์</div>
+<div class="text-xs text-[#C9DAFF]">ภาควิชาสุขศึกษาและพฤติกรรมศาสตร์</div>
+</div>
+</div>
+<button class="md:hidden inline-flex items-center justify-center rounded-xl border border-white/30 text-white h-10 w-12 transition hover:bg-white/10 focus:outline-none" id="mobile-nav-toggle">
+<i class="w-5 h-5" data-lucide="menu" id="mobile-icon-open"></i>
+<i class="w-5 h-5 hidden" data-lucide="x" id="mobile-icon-close"></i>
+</button>
+<nav class="hidden md:flex items-center text-sm tracking-wide primary-nav">
+<div class="nav-item">
+<a href="index.html">หน้าแรก</a>
+</div>
+<div class="nav-item">
+<a href="program.html">หลักสูตร</a>
+</div>
+<div class="nav-item">
+<a class="active" href="news.html">ข่าว/ประกาศ</a>
+</div>
+<div class="nav-item">
+<a href="staff.html">บุคลากร</a>
+</div>
+<div class="nav-item">
+<a href="student.html">นักศึกษา</a>
+<div class="nav-dropdown">
+<a href="student.html#current"><i class="w-4 h-4" data-lucide="user-round"></i>ศิษย์ปัจจุบัน</a>
+<a href="student.html#alumni"><i class="w-4 h-4" data-lucide="user-check"></i>ศิษย์เก่า</a>
+</div>
+</div>
+<div class="nav-item">
+<a href="about.html">เกี่ยวกับเรา</a>
+<div class="nav-dropdown">
+<a href="about.html#history"><i class="w-4 h-4" data-lucide="book-open"></i>ประวัติ</a>
+<a href="about.html#vision"><i class="w-4 h-4" data-lucide="eye"></i>วิสัยทัศน์</a>
+<a href="about.html#leadership"><i class="w-4 h-4" data-lucide="award"></i>ทำเนียบหัวหน้าภาควิชา</a>
+<a href="contact.html"><i class="w-4 h-4" data-lucide="phone"></i>ติดต่อเรา</a>
+</div>
+</div>
+<div class="nav-item">
+<a href="Services.html">บริการวิชาการ</a>
+<div class="nav-dropdown">
+<a href="Services.html#training"><i class="w-4 h-4" data-lucide="presentation"></i>ฝึกอบรม</a>
+<a href="Services.html#journal"><i class="w-4 h-4" data-lucide="newspaper"></i>วารสารสุขศึกษา</a>
+<a href="Services.html#consult"><i class="w-4 h-4" data-lucide="handshake"></i>ให้คำปรึกษา</a>
+</div>
+</div>
+<div class="nav-item">
+<a href="contact.html">ติดต่อ</a>
+</div>
+</nav>
+</div>
+</div>
+<div class="md:hidden bg-white text-[#1D4699] border-t border-white/10 shadow-lg hidden" id="mobile-nav-panel">
+<div class="px-6 py-4 space-y-4 text-sm font-semibold">
+<div class="space-y-1">
+<a class="flex items-center gap-2 py-1" href="index.html">หน้าแรก</a>
+<a class="flex items-center gap-2 py-1" href="program.html">หลักสูตร</a>
+<a class="flex items-center gap-2 py-1" href="news.html">ข่าว/ประกาศ</a>
+<a class="flex items-center gap-2 py-1" href="staff.html">บุคลากร</a>
+<a class="flex items-center gap-2 py-1" href="contact.html">ติดต่อ</a>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-slate-400">นักศึกษา</p>
+<div class="mt-1 space-y-1 pl-3 text-[0.9rem] font-normal text-slate-600">
+<a class="block py-1" href="student.html#current">ศิษย์ปัจจุบัน</a>
+<a class="block py-1" href="student.html#alumni">ศิษย์เก่า</a>
+</div>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-slate-400">เกี่ยวกับเรา</p>
+<div class="mt-1 space-y-1 pl-3 text-[0.9rem] font-normal text-slate-600">
+<a class="block py-1" href="about.html#history">ประวัติ</a>
+<a class="block py-1" href="about.html#vision">วิสัยทัศน์</a>
+<a class="block py-1" href="about.html#leadership">ทำเนียบหัวหน้าภาควิชา</a>
+<a class="block py-1" href="contact.html">ติดต่อเรา</a>
+</div>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-slate-400">บริการวิชาการ</p>
+<div class="mt-1 space-y-1 pl-3 text-[0.9rem] font-normal text-slate-600">
+<a class="block py-1" href="Services.html#training">ฝึกอบรม</a>
+<a class="block py-1" href="Services.html#journal">วารสารสุขศึกษา</a>
+<a class="block py-1" href="Services.html#consult">ให้คำปรึกษา</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Navigation -->
+<header class="relative overflow-hidden">
+<div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-600 via-indigo-500 to-sky-500 opacity-10"></div>
+<div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+<h1 class="text-2xl md:text-4xl font-extrabold">ข่าว / ประกาศ</h1>
+<p class="mt-2 text-slate-600">อัปเดตล่าสุดจากคณะ</p>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-10">
+<div class="grid md:grid-cols-3 gap-6" id="news-list-page"></div>
+</main>
+<!-- Footer -->
+<!-- Footer -->
+<footer class="border-t bg-white">
+<div class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-8 text-sm">
+<div>
+<div class="font-semibold mb-2">คณะสาธารณสุขศาสตร์</div>
+<p class="text-slate-600">ภาควิชาสุขศึกษาและพฤติกรรมศาสตร์ มหาวิทยาลัย (ตัวอย่าง)</p>
+</div>
+<div>
+<div class="font-semibold mb-2">ลิงก์ด่วน</div>
+<ul class="space-y-1 text-slate-600">
+<li><a class="hover:text-[#1D4699]" href="#">คู่มือนิสิต</a></li>
+<li><a class="hover:text-[#1D4699]" href="#">หน่วยงานภายใน</a></li>
+<li><a class="hover:text-[#1D4699]" href="#">ติดต่อ/แผนที่</a></li>
+</ul>
+</div>
+<div>
+<div class="font-semibold mb-2">ติดต่อเรา</div>
+<ul class="space-y-1 text-slate-600">
+<li>โทร 0-0000-0000</li>
+<li>อีเมล info@ph.edu</li>
+<li>เวลาทำการ จ.-ศ. 08:30–16:30 น.</li>
+</ul>
+</div>
+<div>
+<div class="font-semibold mb-2">ติดตามข่าวสาร</div>
+<p class="text-slate-600">Facebook • YouTube • Line Official</p>
+</div>
+</div>
+<div class="text-xs text-[#C9DAFF] text-center pb-6">© 2025 Faculty of Public Health — Demo Preview</div>
+</footer>
+<!-- modal -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50" id="news-modal">
+<div class="bg-white rounded-xl max-w-lg w-full mx-4 p-6 shadow-xl relative">
+<button aria-label="ปิด" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600" id="news-modal-close">✕</button>
+<div class="text-xs text-blue-500 mb-1" id="news-modal-tag"></div>
+<h3 class="text-lg font-semibold" id="news-modal-title"></h3>
+<div class="text-xs text-slate-500 mt-1 mb-3" id="news-modal-date"></div>
+<p class="text-sm text-slate-700 leading-relaxed" id="news-modal-body"></p>
+</div>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('news-modal');
+      const modalTitle = document.getElementById('news-modal-title');
+      const modalDate = document.getElementById('news-modal-date');
+      const modalTag = document.getElementById('news-modal-tag');
+      const modalBody = document.getElementById('news-modal-body');
+      const closeBtn = document.getElementById('news-modal-close');
+
+      function openModal({ title, date, tag, body }) {
+        if (modalTitle) modalTitle.textContent = title || '';
+        if (modalDate) modalDate.textContent = date || '';
+        if (modalTag) modalTag.textContent = tag || '';
+        if (modalBody) modalBody.textContent = body || '';
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      function wireCards() {
+        document.querySelectorAll('#news-list-page article').forEach((card) => {
+          card.addEventListener('click', () => {
+            openModal({
+              title: card.dataset.title,
+              date: card.dataset.date,
+              tag: card.dataset.tag,
+              body: card.dataset.body,
+            });
+          });
+        });
+      }
+
+      function renderNews(items) {
+        const container = document.getElementById('news-list-page');
+        if (!container) return;
+        if (!items.length) {
+          container.innerHTML = '<p class="text-sm text-slate-500">ยังไม่มีข้อมูลข่าว/ประกาศ กรุณาเพิ่มจาก news.json</p>';
+          return;
+        }
+        const safe = (s) => (s || '').replace(/"/g, '&quot;');
+        container.innerHTML = items
+          .map(
+            (n) => `
+            <article class="rounded-xl overflow-hidden shadow hover:shadow-xl transition-shadow bg-white cursor-pointer"
+              data-title="${safe(n.title || 'หัวข้อข่าว')}"
+              data-date="${safe(n.date || '-')}"
+              data-tag="${safe(n.tag || 'ข่าว')}"
+              data-body="${safe(n.body || n.summary || 'ยังไม่มีรายละเอียดเพิ่มเติม')}">
+              <img src="${n.image || './assets/images/news-1.jpg'}" alt="news" class="h-44 w-full object-cover"/>
+              <div class="p-5">
+                <div class="flex items-center gap-2 text-xs text-blue-200">
+                  <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5">${n.tag || 'ข่าว'}</span>
+                  <span class="flex items-center gap-1"><i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>${n.date || '-'}</span>
+                </div>
+                <h3 class="mt-2 font-semibold leading-snug">${n.title || 'หัวข้อข่าว'}</h3>
+                <p class="text-sm text-slate-600 mt-2">${n.summary || ''}</p>
+                <div class="mt-3 flex items-center justify-between">
+                  <span class="text-xs text-blue-200">${n.by ? `โดย ${n.by}` : ''}</span>
+                  <span class="text-sm inline-flex items-center gap-1 text-blue-700 hover:text-blue-900">
+                    อ่านรายละเอียด <i data-lucide="external-link" class="w-4 h-4"></i>
+                  </span>
+                </div>
+              </div>
+            </article>
+          `
+          )
+          .join('');
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+        wireCards();
+      }
+
+      fetch('./news.json')
+        .then((res) => res.json())
+        .then((data) => (Array.isArray(data) ? renderNews(data) : renderNews([])))
+        .catch(() => renderNews([]));
+    });
+  </script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+      const mobileToggle = document.getElementById('mobile-nav-toggle');
+      const mobilePanel = document.getElementById('mobile-nav-panel');
+      const mobileIconOpen = document.getElementById('mobile-icon-open');
+      const mobileIconClose = document.getElementById('mobile-icon-close');
+
+      function closeMobileNav() {
+        if (!mobilePanel) return;
+        mobilePanel.classList.add('hidden');
+        if (mobileIconOpen) mobileIconOpen.classList.remove('hidden');
+        if (mobileIconClose) mobileIconClose.classList.add('hidden');
+      }
+
+      if (mobileToggle && mobilePanel) {
+        mobileToggle.addEventListener('click', () => {
+          const willOpen = mobilePanel.classList.contains('hidden');
+          mobilePanel.classList.toggle('hidden');
+          if (willOpen) {
+            if (mobileIconOpen) mobileIconOpen.classList.add('hidden');
+            if (mobileIconClose) mobileIconClose.classList.remove('hidden');
+          } else {
+            if (mobileIconOpen) mobileIconOpen.classList.remove('hidden');
+            if (mobileIconClose) mobileIconClose.classList.add('hidden');
+          }
+        });
+
+        mobilePanel.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeMobileNav);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
