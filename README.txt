@@ -38,3 +38,15 @@ Pages included (new design):
 - student.html (student resources)
 
 Navigation links connect among these pages inside New_Web_page only, keeping the site self-contained.
+
+Updating news without touching HTML:
+1. ติดตั้ง Python 3 และเปิดเทอร์มินัลในโฟลเดอร์โปรเจ็กต์นี้
+2. รันคำสั่ง `python tools/update_news.py`
+3. เลือกเมนูตามต้องการ (ดูรายการข่าว, เพิ่มข่าวใหม่, แก้ข่าวเดิม)
+4. เมื่อเพิ่ม/แก้เสร็จ หน้า news.html จะอ่านข้อมูลล่าสุดจาก `news.json` โดยอัตโนมัติเมื่อเปิดผ่านเว็บเซิร์ฟเวอร์
+
+ต้องการอินเตอร์เฟซแบบหน้าต่าง? ใช้คำสั่ง `python tools/news_editor_gui.py` เพื่อเปิดตัวแก้ข่าวด้วย Tkinter GUI (มีรายการข่าวด้านซ้ายและแบบฟอร์มให้กรอกด้านขวา)
+
+Fields ที่รองรับใน `news.json`:
+- `images`: ใส่เป็นอาร์เรย์ของพาธรูปภาพ (เช่น `["./assets/images/news-4.jpg","./assets/images/news-4b.jpg"]`) โมดัลจะแสดงทุกภาพแบบเลื่อนลง
+- `links`: ใส่เป็นอาร์เรย์ของออบเจ็กต์ `{ "label": "เอกสารเพิ่มเติม", "url": "https://..." }` หรือใส่เป็นสตริงลิงก์เฉย ๆ ก็ได้ ระบบจะสร้างปุ่ม “ดูเพิ่มเติม” ให้

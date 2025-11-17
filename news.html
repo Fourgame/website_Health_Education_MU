@@ -241,12 +241,14 @@
 </footer>
 <!-- modal -->
 <div class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50" id="news-modal">
-<div class="bg-white rounded-xl max-w-lg w-full mx-4 p-6 shadow-xl relative">
+<div class="bg-white rounded-xl max-w-3xl w-full mx-4 p-6 shadow-xl relative max-h-[90vh] overflow-y-auto">
 <button aria-label="ปิด" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600" id="news-modal-close">✕</button>
 <div class="text-xs text-blue-500 mb-1" id="news-modal-tag"></div>
 <h3 class="text-lg font-semibold" id="news-modal-title"></h3>
 <div class="text-xs text-slate-500 mt-1 mb-3" id="news-modal-date"></div>
-<p class="text-sm text-slate-700 leading-relaxed" id="news-modal-body"></p>
+<div class="space-y-3 hidden" id="news-modal-gallery"></div>
+<div class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap" id="news-modal-body"></div>
+<div class="flex flex-wrap gap-2 mt-4 hidden" id="news-modal-links"></div>
 </div>
 </div>
 <script>
@@ -256,13 +258,74 @@
       const modalDate = document.getElementById('news-modal-date');
       const modalTag = document.getElementById('news-modal-tag');
       const modalBody = document.getElementById('news-modal-body');
+      const modalGallery = document.getElementById('news-modal-gallery');
+      const modalLinks = document.getElementById('news-modal-links');
       const closeBtn = document.getElementById('news-modal-close');
 
-      function openModal({ title, date, tag, body }) {
+      function normalizeLinks(list = []) {
+        if (!Array.isArray(list)) return [];
+        return list
+          .map((item, idx) => {
+            if (!item) return null;
+            if (typeof item === 'string') {
+              return { label: `ดูเพิ่มเติม ${idx + 1}`, url: item };
+            }
+            if (item.url) {
+              return { label: item.label || `ดูเพิ่มเติม ${idx + 1}`, url: item.url };
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+
+      function renderGallery(images = []) {
+        if (!modalGallery) return;
+        modalGallery.innerHTML = '';
+        const list = Array.isArray(images) ? images.filter(Boolean) : [];
+        if (!list.length) {
+          modalGallery.classList.add('hidden');
+          return;
+        }
+        modalGallery.classList.remove('hidden');
+        list.forEach((src) => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'news image';
+          img.className = 'w-full rounded-lg object-contain bg-slate-100 max-h-[60vh]';
+          modalGallery.appendChild(img);
+        });
+      }
+
+      function renderLinks(links = []) {
+        if (!modalLinks) return;
+        modalLinks.innerHTML = '';
+        const items = normalizeLinks(links);
+        if (!items.length) {
+          modalLinks.classList.add('hidden');
+          return;
+        }
+        modalLinks.classList.remove('hidden');
+        items.forEach((item) => {
+          const btn = document.createElement('a');
+          btn.href = item.url;
+          btn.target = '_blank';
+          btn.rel = 'noopener noreferrer';
+          btn.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition';
+          btn.innerHTML = `<span>${item.label}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
+          modalLinks.appendChild(btn);
+        });
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons({ root: modalLinks });
+        }
+      }
+
+      function openModal({ title, date, tag, body, images = [], links = [] }) {
         if (modalTitle) modalTitle.textContent = title || '';
         if (modalDate) modalDate.textContent = date || '';
         if (modalTag) modalTag.textContent = tag || '';
         if (modalBody) modalBody.textContent = body || '';
+        renderGallery(images);
+        renderLinks(links);
         if (modal) {
           modal.classList.remove('hidden');
           modal.classList.add('flex');
@@ -282,6 +345,16 @@
         });
       }
 
+      const parseDatasetList = (value) => {
+        if (!value) return [];
+        try {
+          return JSON.parse(decodeURIComponent(value));
+        } catch (error) {
+          console.warn('ไม่สามารถอ่านข้อมูลเพิ่มเติมของข่าวได้', error);
+          return [];
+        }
+      };
+
       function wireCards() {
         document.querySelectorAll('#news-list-page article').forEach((card) => {
           card.addEventListener('click', () => {
@@ -290,6 +363,8 @@
               date: card.dataset.date,
               tag: card.dataset.tag,
               body: card.dataset.body,
+              images: parseDatasetList(card.dataset.images),
+              links: parseDatasetList(card.dataset.links),
             });
           });
         });
@@ -299,36 +374,50 @@
         const container = document.getElementById('news-list-page');
         if (!container) return;
         if (!items.length) {
-          container.innerHTML = '<p class="text-sm text-slate-500">ยังไม่มีข้อมูลข่าว/ประกาศ กรุณาเพิ่มจาก news.json</p>';
+          container.innerHTML = '<p class="text-sm text-slate-500">??????????????????/?????? ????????????? news.json</p>';
           return;
         }
         const safe = (s) => (s || '').replace(/"/g, '&quot;');
+        const encodeList = (value) => encodeURIComponent(JSON.stringify(value || []));
         container.innerHTML = items
-          .map(
-            (n) => `
+          .map((n) => {
+            const images = Array.isArray(n.images) && n.images.length
+              ? n.images.filter(Boolean)
+              : n.image
+              ? [n.image]
+              : [];
+            const primaryImage = images[0] || './assets/images/img/error_load_picture.jpg';
+            const links = Array.isArray(n.links)
+              ? n.links
+              : n.link
+              ? [{ label: n.linkLabel || '???????????', url: n.link }]
+              : [];
+            return `
             <article class="rounded-xl overflow-hidden shadow hover:shadow-xl transition-shadow bg-white cursor-pointer"
-              data-title="${safe(n.title || 'หัวข้อข่าว')}"
+              data-title="${safe(n.title || '????/??????')}"
               data-date="${safe(n.date || '-')}"
-              data-tag="${safe(n.tag || 'ข่าว')}"
-              data-body="${safe(n.body || n.summary || 'ยังไม่มีรายละเอียดเพิ่มเติม')}">
-              <img src="${n.image || './assets/images/news-1.jpg'}" alt="news" class="h-44 w-full object-cover"/>
+              data-tag="${safe(n.tag || '????/??????')}"
+              data-body="${safe(n.body || n.summary || '???????????????????????????')}"
+              data-images="${encodeList(images)}"
+              data-links="${encodeList(links)}">
+              <img src="${primaryImage}" alt="news" class="h-44 w-full object-cover"/>
               <div class="p-5">
                 <div class="flex items-center gap-2 text-xs text-blue-200">
-                  <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5">${n.tag || 'ข่าว'}</span>
+                  <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5">${n.tag || '????/??????'}</span>
                   <span class="flex items-center gap-1"><i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>${n.date || '-'}</span>
                 </div>
-                <h3 class="mt-2 font-semibold leading-snug">${n.title || 'หัวข้อข่าว'}</h3>
+                <h3 class="mt-2 font-semibold leading-snug">${n.title || '????/??????'}</h3>
                 <p class="text-sm text-slate-600 mt-2">${n.summary || ''}</p>
                 <div class="mt-3 flex items-center justify-between">
-                  <span class="text-xs text-blue-200">${n.by ? `โดย ${n.by}` : ''}</span>
+                  <span class="text-xs text-blue-200">${n.by ? `??? ${n.by}` : ''}</span>
                   <span class="text-sm inline-flex items-center gap-1 text-blue-700 hover:text-blue-900">
-                    อ่านรายละเอียด <i data-lucide="external-link" class="w-4 h-4"></i>
+                    ?????????????? <i data-lucide="external-link" class="w-4 h-4"></i>
                   </span>
                 </div>
               </div>
             </article>
-          `
-          )
+          `;
+          })
           .join('');
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
           window.lucide.createIcons();
