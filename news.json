@@ -1,5 +1,20 @@
 [
   {
+    "title": "ความน่ารัก",
+    "date": "1414",
+    "tag": "ข่าว/ประกาศ",
+    "by": "ความน่ารัก",
+    "summary": "หมูเด้ง",
+    "body": "หมูเด้ง",
+    "images": [
+      "./assets/images/img/error_load_picture.jpg"
+    ],
+    "image": "./assets/images/img/error_load_picture.jpg",
+    "links": [],
+    "link": "",
+    "linkLabel": ""
+  },
+  {
     "title": "ขอเชิญบุคลากรสายวิชาการทุกท่านเข้าร่วมอบรม ครั้งที่ 1",
     "date": "17/11/2025",
     "tag": "ข่าว/ประกาศ",

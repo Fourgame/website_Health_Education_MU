@@ -3,6 +3,9 @@
 <html lang="th">
 <head> <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <title>หลักสูตร | คณะสาธารณสุขศาสตร์</title>
 <meta content="ข้อมูลหลักสูตร ป.ตรี ป.โท ป.เอก ของคณะสาธารณสุขศาสตร์" name="description"/>
 <link href="./assets/favicon.png" rel="icon"/>
@@ -98,6 +101,189 @@
     .nav-dropdown a:hover {
       background: rgba(15, 23, 42, 0.04);
       opacity: 1;
+    }
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+      margin-top : 5rem;
+    }
+    /* การ์ดหลักสูตร */
+@media (min-width: 1024px) {
+  .program-card {
+    transition: transform 0.25s ease;
+  }
+  .program-card:nth-child(odd) {
+    margin-right: 1.5rem;
+  }
+  .program-card:nth-child(even) {
+    margin-left: 1.5rem;
+  }
+}
+.program-card {
+  overflow: visible;
+  position: relative;
+  
+  
+}
+
+/* layout ซ้าย–ขวา */
+.program-card-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 220px;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.program-card-inner > * {
+  flex: 1 1 0%;
+}
+
+
+.program-card:nth-child(even) .program-card-inner {
+  flex-direction: row-reverse;
+}
+
+.program-content {
+  padding: 1.5rem;
+}
+
+.program-card:nth-child(even) .program-content {
+  text-align: right;
+  align-items: flex-end;
+}
+
+@media (min-width: 640px) {
+  .program-card:nth-child(even) .program-content {
+    flex: 0 0 55%;
+    margin-left: auto;
+    padding-right: 2.25rem;
+    padding-left: 1.25rem;
+  }
+}
+
+
+
+
+/* พื้นหลังครึ่งล่างแบบ banner เตี้ย ๆ */
+.program-card .stand-scene {
+  background: #fff4ee;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: flex-end;      /* keep figure anchored */
+  justify-content: center;
+  padding: 0;
+  min-height: 200px;
+  border-radius: 1.25rem 0 0 1.25rem;
+  flex: 0 0 clamp(140px, 42%, 260px);
+  max-width: clamp(160px, 45%, 300px);
+}
+
+.program-card:nth-child(even) .stand-scene {
+  border-radius: 0 1.25rem 1.25rem 0;
+}
+
+
+@media (min-width: 640px) {
+  .program-card .stand-scene {
+    flex: 0 0 38%;
+    max-width: 320px;
+    min-height: 220px;
+  }
+}
+
+/* รูปคน: ใหญ่ + ลอยออกมาจาก banner */
+.program-card .stand-figure {
+  position: absolute;
+  left: 50%;
+  bottom: -20px !important;             
+  transform: translateX(-50%);
+  width: clamp(180px, 60vw, 260px);
+  /* z-index: 10; */
+}
+
+@media (min-width: 640px) {
+  .program-card .stand-figure {
+    left: 55%;
+    bottom: -55px;
+    width: min(300px, 45vw);
+  }
+  .program-card:nth-child(even) .stand-figure {
+    left: 45%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .program-card .stand-figure {
+    width: 360px;
+    bottom: -60px;
+  }
+}
+
+/* ตัวรูป & hover */
+.program-card .stand-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.45s ease, opacity 0.3s ease;
+  transform-origin: center bottom;
+}
+
+.program-card .stand-image.hover-state {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+/* เงาด้านล่างตัวคน */
+.program-card .stand-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translate(-50%, 0);
+  width: 70%;
+  height: 20px;
+  background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.4), transparent 70%);
+  filter: blur(6px);
+  opacity: 0.3;
+  z-index: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* เอฟเฟกต์ตอน hover */
+.program-card:hover .stand-image.base-state {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.program-card:hover .stand-image.hover-state {
+  opacity: 1;
+  transform: scale(1.08);
+}
+.program-card:hover .stand-shadow {
+  opacity: 0.45;
+  transform: translate(-50%, 0) scaleX(1.1);
+}
+
+
+    .program-card:hover .stand-image.base-state {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    .program-card:hover .stand-image.hover-state {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+    .program-card:hover .stand-shadow {
+      opacity: 0.45;
+      transform: translate(-50%, 0) scaleX(1.15);
     }
   </style>
 </head>
@@ -205,160 +391,159 @@
 </div>
 </header>
 <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+
+<!-- HERO SECTION -->
 <section class="bg-slate-50 rounded-2xl p-6 md:p-10 grid md:grid-cols-2 gap-8 items-center shadow-sm">
 <div>
 <p class="text-sm uppercase tracking-[0.2em] text-blue-500 font-semibold">Path to Public Health</p>
-<h2 class="mt-3 text-3xl font-bold text-slate-900">??????????????? ?????????????????????????</h2>
-<p class="mt-4 text-slate-600">?????????????????? ???????????????????????? ????????????????????????? ?????????????????????????????????? ??????????????????? ???????? ?????????????????????</p>
+<h2 class="mt-3 text-3xl font-bold text-slate-900">เส้นทางการเรียนรู้ด้านสุขศึกษาและการสร้างเสริมสุขภาพ</h2>
+<p class="mt-4 text-slate-600">
+  ครอบคลุมการเรียนรู้ทั้งด้านทฤษฎีและปฏิบัติ ตั้งแต่การส่งเสริมสุขภาพระดับบุคคล ชุมชน
+  ไปจนถึงการพัฒนานโยบายสาธารณสุข เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และคุณธรรม
+  พร้อมทำงานร่วมกับเครือข่ายสุขภาพในทุกระดับ
+</p>
 <div class="mt-6 flex flex-wrap gap-3 text-sm">
 <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white shadow">
 <i class="w-4 h-4 text-blue-500" data-lucide="users"></i>
-              ???????????????????????
+              เรียนรู้ร่วมกับชุมชนจริง
             </div>
 <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white shadow">
 <i class="w-4 h-4 text-blue-500" data-lucide="globe"></i>
-              ?????????????????????????????-?????
+              มาตรฐานวิชาชีพระดับชาติ–นานาชาติ
             </div>
 <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white shadow">
 <i class="w-4 h-4 text-blue-500" data-lucide="sparkles"></i>
-              ??????????????????????
+              บัณฑิตพร้อมทำงานทันที
             </div>
 </div>
 </div>
 <div class="bg-gradient-to-br from-blue-600/10 via-sky-500/10 to-orange-500/10 rounded-2xl p-6 border border-blue-100">
-<h3 class="text-lg font-semibold text-slate-900">??????????????????</h3>
+<h3 class="text-lg font-semibold text-slate-900">แนวทางการเรียนโดยสังเขป</h3>
 <ul class="mt-4 space-y-3 text-slate-600 text-sm">
-<li class="flex gap-3"><span class="text-orange-500 mt-0.5"></span> ?????????: ???????????????????????????????????????????? ?????????????????????</li>
-<li class="flex gap-3"><span class="text-orange-500 mt-0.5"></span> ?????????????/????????: ???????????????? ????????????????</li>
-<li class="flex gap-3"><span class="text-orange-500 mt-0.5"></span> ????????????????: ????????????? ???????? ?????????????????????????</li>
+<li class="flex gap-3">
+  <span class="text-orange-500 mt-0.5">•</span>
+  ปีที่ 1–2 : พื้นฐานสาธารณสุข สุขศึกษา พฤติกรรมศาสตร์ และทักษะการทำงานเป็นทีม
+</li>
+<li class="flex gap-3">
+  <span class="text-orange-500 mt-0.5">•</span>
+  ปีที่ 3–4 / ระดับบัณฑิตศึกษา : เน้นการประยุกต์ใช้ การออกแบบโครงการ และงานวิจัยด้านสุขภาพ
+</li>
+<li class="flex gap-3">
+  <span class="text-orange-500 mt-0.5">•</span>
+  การฝึกประสบการณ์วิชาชีพ : ฝึกงานภาคสนามในหน่วยงานสุขภาพ โรงพยาบาล ชุมชน และองค์กรต่าง ๆ
+</li>
 </ul>
 <div class="mt-6">
 <a class="inline-flex items-center gap-2 px-4 h-11 rounded-xl bg-orange-500 text-white text-sm font-semibold shadow hover:bg-orange-600" href="contact.html">
-              ??????????????????
+              สอบถามข้อมูลเพิ่มเติม
               <i class="w-4 h-4" data-lucide="arrow-right"></i>
 </a>
 </div>
 </div>
 </section>
+
+<!-- PROGRAM LIST -->
 <section>
 <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
 <div>
 <p class="text-xs uppercase tracking-[0.35em] text-blue-500">Programs Overview</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-1">????????????????????????????</h3>
+<h3 class="text-2xl font-bold text-slate-900 mt-1">หลักสูตรที่เปิดสอนในภาควิชา</h3>
 </div>
-<a class="text-sm text-blue-700 hover:text-blue-900 underline decoration-dashed" href="news.html">????????/?????????????????</a>
 </div>
-<div class="grid lg:grid-cols-2 gap-6">
-<article class="rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition group">
-<div class="grid sm:grid-cols-2">
-<img alt="?????????" class="h-60 w-full object-cover sm:h-full" src="./assets/images/program-bsc.jpg"/>
-<div class="p-6 flex flex-col">
-<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">????????? (???????)</span>
-<h4 class="mt-2 text-lg font-semibold text-slate-900">???????????????????????? (?????????????????????????)</h4>
-<p class="mt-3 text-sm text-slate-600 flex-1">??????????????????????????? ?????????????? ????????????? ?????????????????? ??????????????????????????????????????????? ?</p>
+
+<div class="program-list">
+
+  <!-- BACHELOR NORMAL -->
+<article class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+<div class="program-card-inner">
+<div class="stand-scene">
+<div class="stand-figure">
+<span aria-hidden="true" class="stand-shadow"></span>
+<img alt="นักศึกษาปริญญาตรี" class="stand-image base-state" src="./assets/stand_model/1.png"/>
+<img alt="บัณฑิตปริญญาตรี" class="stand-image hover-state" src="./assets/stand_model/2.png"/>
+</div>
+</div>
+<div class="program-content flex flex-col">
+<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาตรี</span>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรบัณฑิต (สาธารณสุขศาสตร์)</h4>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ </h4>
+
 <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>4 ??</span>
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="map-pin"></i>???????????????????</span>
-</div>
-<div class="mt-5 flex gap-2">
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" href="program/B.Sc. (Public Health).html">
-                    ?????????????????? <i class="w-4 h-4" data-lucide="arrow-right"></i>
-</a>
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg border border-slate-200 text-sm text-slate-600 hover:bg-slate-50" href="program/B.Sc. (Public Health)_extra.html">
-                    ???????????
-                  </a>
+<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาเรียน 4 ปี</span>
 </div>
 </div>
 </div>
 </article>
-<article class="rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition group">
-<div class="grid sm:grid-cols-2">
-<img alt="?????????????????" class="h-60 w-full object-cover sm:h-full" src="./assets/images/program-bsc-special.jpg"/>
-<div class="p-6 flex flex-col">
-<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">????????? (????????)</span>
-<h4 class="mt-2 text-lg font-semibold text-slate-900">???????????????????????? (?????????????????????????) ????????</h4>
-<p class="mt-3 text-sm text-slate-600 flex-1">??????????????????????????????????????? ?????????????????????? ??????????????????????????????? ??????????????????????????????????</p>
-<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>4 ??</span>
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="calendar"></i>????????????????????</span>
+
+  <!-- BACHELOR SPECIAL -->
+<article class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+<div class="program-card-inner">
+<div class="stand-scene">
+<div class="stand-figure">
+<span aria-hidden="true" class="stand-shadow"></span>
+<img alt="นักศึกษาปริญญาตรีต่อเนื่อง" class="stand-image base-state" src="./assets/stand_model/3.png"/>
+<img alt="บัณฑิตปริญญาตรีต่อเนื่อง" class="stand-image hover-state" src="./assets/stand_model/4.png"/>
 </div>
-<div class="mt-5 flex gap-2">
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" href="program/B.Sc. (Public Health)_extra.html">
-                    ????????????????? <i class="w-4 h-4" data-lucide="arrow-right"></i>
-</a>
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg border border-slate-200 text-sm text-slate-600 hover:bg-slate-50" href="contact.html">
-                    ?????????????????
-                  </a>
+</div>
+<div class="program-content flex flex-col">
+<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาโท</span>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรมหาบัณฑิต </h4>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ </h4>
+
+<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาโดยประมาณ 2 ปี</span>
 </div>
 </div>
 </div>
 </article>
-<article class="rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition group">
-<div class="grid sm:grid-cols-2">
-<img alt="????????" class="h-60 w-full object-cover sm:h-full" src="./assets/images/program-msc.jpg"/>
-<div class="p-6 flex flex-col">
-<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">????????</span>
-<h4 class="mt-2 text-lg font-semibold text-slate-900">???????????????????????????</h4>
-<p class="mt-3 text-sm text-slate-600 flex-1">????????????????????????????????????????????? ??????????????????????????????? ???????????????? ?????????????????????</p>
-<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>2 ??</span>
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="layers"></i>????? + ?????????????</span>
+
+  <!-- MASTER -->
+<article class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+<div class="program-card-inner">
+<div class="stand-scene">
+<div class="stand-figure">
+<span aria-hidden="true" class="stand-shadow"></span>
+<img alt="นักศึกษาปริญญาโท" class="stand-image base-state" src="./assets/stand_model/5.png"/>
+<img alt="บัณฑิตปริญญาโท" class="stand-image hover-state" src="./assets/stand_model/6.png"/>
 </div>
-<div class="mt-5 flex gap-2">
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" href="program/M.Sc. (Public Health).html">
-                    ?????????????????? <i class="w-4 h-4" data-lucide="arrow-right"></i>
-</a>
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg border border-slate-200 text-sm text-slate-600 hover:bg-slate-50" href="program/M.Sc. (Public Health)_extra.html">
-                    ????????????????
-                  </a>
+</div>
+<div class="program-content flex flex-col">
+<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาโท </span>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรมหาบัณฑิต </h4>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ (ภาคพิเศษ) </h4>
+
+<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาโดยประมาณ 2 ปี</span>
 </div>
 </div>
 </div>
 </article>
-<article class="rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition group">
-<div class="grid sm:grid-cols-2">
-<img alt="???????????" class="h-60 w-full object-cover sm:h-full" src="./assets/images/program-drph.jpg"/>
-<div class="p-6 flex flex-col">
-<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">?????????</span>
-<h4 class="mt-2 text-lg font-semibold text-slate-900">????????????????????????? (Dr.P.H.)</h4>
-<p class="mt-3 text-sm text-slate-600 flex-1">?????????????????????????????????????????? ???????????????????????????????? ??????????????????????????????????????????</p>
-<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>3-4 ??</span>
-<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="megaphone"></i>???????????????????????</span>
+
+  <!-- DOCTORAL -->
+<article class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+<div class="program-card-inner">
+<div class="stand-scene">
+<div class="stand-figure">
+<span aria-hidden="true" class="stand-shadow"></span>
+<img alt="นักศึกษาปริญญาเอก" class="stand-image base-state" src="./assets/stand_model/7.png"/>
+<img alt="ดุษฎีบัณฑิต" class="stand-image hover-state" src="./assets/stand_model/8.png"/>
 </div>
-<div class="mt-5 flex gap-2">
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" href="program/Dr.P.H.html">
-                    ?????????????????? <i class="w-4 h-4" data-lucide="arrow-right"></i>
-</a>
-<a class="inline-flex items-center gap-2 px-3 h-10 rounded-lg border border-slate-200 text-sm text-slate-600 hover:bg-slate-50" href="contact.html">
-                    ?????/?????????
-                  </a>
+</div>
+<div class="program-content flex flex-col">
+<span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาเอก</span>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรสาธารณสุขศาสตรดุษฎีบัณฑิต</h4>
+<h4 class="mt-2 text-lg font-semibold text-slate-900">(หลักสูตรนานาชาติ)</h4>
+<div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+<span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาเรียน 1 ปี</span>
 </div>
 </div>
 </div>
 </article>
+
 </div>
 </section>
-<section class="bg-gradient-to-br from-blue-600/10 via-sky-500/10 to-orange-500/10 rounded-2xl p-8 border border-blue-100">
-<div class="grid md:grid-cols-2 gap-6">
-<div>
-<h4 class="text-xl font-bold text-slate-900">????????????????????</h4>
-<ul class="mt-4 space-y-3 text-sm text-slate-700">
-<li class="flex gap-3"><i class="w-4 h-4 text-blue-600 mt-1" data-lucide="book-open"></i>????????????????????????????????????????</li>
-<li class="flex gap-3"><i class="w-4 h-4 text-blue-600 mt-1" data-lucide="handshake"></i>??????????????????????????????? ???????? ?????????????</li>
-<li class="flex gap-3"><i class="w-4 h-4 text-blue-600 mt-1" data-lucide="briefcase"></i>????????????????????????????????????????</li>
-</ul>
-</div>
-<div>
-<h4 class="text-xl font-bold text-slate-900">???/???????????</h4>
-<p class="text-sm text-slate-600 mt-2">???????????????? mini grant, ???????????????????????, ?????????????????????? ??????????????????????????????</p>
-<div class="mt-6 flex flex-wrap gap-3 text-sm">
-<div class="px-3 py-2 rounded-full bg-white shadow border border-blue-100">???????????????????????</div>
-<div class="px-3 py-2 rounded-full bg-white shadow border border-blue-100">????????????????? 2 ???????</div>
-</div>
-</div>
-</div>
-</section>
+
+
 </main>
 <!-- Footer -->
 <footer class="border-t bg-white">

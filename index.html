@@ -4,6 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <title>คณะสาธารณสุขศาสตร์ | ภาควิชาสุขศึกษาและพฤติกรรมศาสตร์</title>
   <meta name="description"
     content="หน้าใหม่ของคณะสาธารณสุขศาสตร์ ภาควิชาสุขศึกษาและพฤติกรรมศาสตร์ แสดงข้อมูลหลักสูตร ข่าว/ประกาศ และกิจกรรมสำคัญ" />
@@ -66,7 +71,7 @@
     }
 
     .primary-nav a:hover {
-      color: #fff;
+      color: #f97316;
     }
 
     .primary-nav a:hover::after,
@@ -146,7 +151,7 @@
     }
 
     .hero-slider button:hover {
-      background: white;
+      background: rgb(0, 0, 0);
     }
 
     .hero-slider button[data-dir="prev"] {
@@ -155,6 +160,219 @@
 
     .hero-slider button[data-dir="next"] {
       right: 0.65rem;
+    }
+
+    .modal-gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 999px;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1D4699;
+      box-shadow: 0 10px 25px rgba(16, 37, 79, 0.2);
+      opacity: 0.9;
+    }
+
+    .modal-gallery-nav:hover {
+      background: #fff;
+      opacity: 1;
+    }
+
+    .modal-gallery-nav[data-gallery-dir="prev"] {
+      left: 0.5rem;
+    }
+
+    .modal-gallery-nav[data-gallery-dir="next"] {
+      right: 0.5rem;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.9) 45%, rgba(255, 255, 255, 1) 90%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Program highlight cards (shared with program.html) */
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+      margin-top: 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .program-card {
+        transition: transform 0.25s ease;
+      }
+
+      .program-card:nth-child(odd) {
+        margin-right: 1.5rem;
+      }
+
+      .program-card:nth-child(even) {
+        margin-left: 1.5rem;
+      }
+    }
+
+    .program-card {
+      overflow: visible;
+      position: relative;
+    }
+
+    .program-card-inner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      min-height: 220px;
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+    }
+
+    .program-card-inner>* {
+      flex: 1 1 0%;
+    }
+
+    .program-card:nth-child(even) .program-card-inner {
+      flex-direction: row-reverse;
+    }
+
+    .program-content {
+      padding: 1.5rem;
+    }
+
+    .program-card:nth-child(even) .program-content {
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    @media (min-width: 640px) {
+      .program-card:nth-child(even) .program-content {
+        flex: 0 0 55%;
+        margin-left: auto;
+        padding-right: 2.25rem;
+        padding-left: 1.25rem;
+      }
+    }
+
+    .program-card .stand-scene {
+      background: #fff4ee;
+      position: relative;
+      overflow: visible;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      min-height: 200px;
+      border-radius: 1.25rem 0 0 1.25rem;
+      flex: 0 0 clamp(140px, 42%, 260px);
+      max-width: clamp(160px, 45%, 300px);
+    }
+
+    .program-card:nth-child(even) .stand-scene {
+      border-radius: 0 1.25rem 1.25rem 0;
+    }
+
+    @media (min-width: 640px) {
+      .program-card .stand-scene {
+        flex: 0 0 38%;
+        max-width: 320px;
+        min-height: 220px;
+      }
+    }
+
+    .program-card .stand-figure {
+      position: absolute;
+      left: 50%;
+      bottom: -20px !important;
+      transform: translateX(-50%);
+      width: clamp(180px, 60vw, 260px);
+      /* z-index: 10; */
+    }
+
+    @media (min-width: 640px) {
+      .program-card .stand-figure {
+        left: 55%;
+        bottom: -55px;
+        width: min(300px, 45vw);
+      }
+
+      .program-card:nth-child(even) .stand-figure {
+        left: 45%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .program-card .stand-figure {
+        width: 360px;
+        bottom: -60px;
+      }
+    }
+
+    .program-card .stand-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.45s ease, opacity 0.3s ease;
+      transform-origin: center bottom;
+    }
+
+    .program-card .stand-image.hover-state {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    .program-card .stand-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translate(-50%, 0);
+      width: 70%;
+      height: 20px;
+      background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.4), transparent 70%);
+      filter: blur(6px);
+      opacity: 0.3;
+      z-index: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .program-card:hover .stand-image.base-state {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .program-card:hover .stand-image.hover-state {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .program-card:hover .stand-shadow {
+      opacity: 0.45;
+      transform: translate(-50%, 0) scaleX(1.1);
     }
   </style>
 </head>
@@ -165,9 +383,8 @@
     <div class="bg-[#1D4699] text-white shadow">
       <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div
-            class="h-11 w-11">
-                        <img src="./assets/Mahidol_Logo.png" alt="ภาพตัวอย่างกิจกรรมของนิสิต" class="h-full w-full object-cover" />
+          <div class="h-11 w-11">
+            <img src="./assets/Mahidol_Logo.png" alt="ภาพตัวอย่างกิจกรรมของนิสิต" class="h-full w-full object-cover" />
           </div>
           <div class="leading-tight">
             <div class="font-semibold text-lg">คณะสาธารณสุขศาสตร์</div>
@@ -200,15 +417,6 @@
             </div>
           </div>
           <div class="nav-item">
-            <a href="about.html">เกี่ยวกับเรา</a>
-            <div class="nav-dropdown">
-              <a href="about.html#history"><i data-lucide="book-open" class="w-4 h-4"></i>ประวัติ</a>
-              <a href="about.html#vision"><i data-lucide="eye" class="w-4 h-4"></i>วิสัยทัศน์</a>
-              <a href="about.html#leadership"><i data-lucide="award" class="w-4 h-4"></i>ทำเนียบหัวหน้าภาควิชา</a>
-              <a href="contact.html"><i data-lucide="phone" class="w-4 h-4"></i>ติดต่อเรา</a>
-            </div>
-          </div>
-          <div class="nav-item">
             <a href="Services.html">บริการวิชาการ</a>
             <div class="nav-dropdown">
               <a href="Services.html#training"><i data-lucide="presentation" class="w-4 h-4"></i>ฝึกอบรม</a>
@@ -217,13 +425,19 @@
             </div>
           </div>
           <div class="nav-item">
-            <a href="contact.html">ติดต่อ</a>
+            <a href="about.html">เกี่ยวกับเรา</a>
+            <div class="nav-dropdown">
+              <a href="about.html#history"><i data-lucide="book-open" class="w-4 h-4"></i>ประวัติ</a>
+              <a href="about.html#vision"><i data-lucide="eye" class="w-4 h-4"></i>วิสัยทัศน์</a>
+              <a href="about.html#leadership"><i data-lucide="award" class="w-4 h-4"></i>ทำเนียบหัวหน้าภาควิชา</a>
+              <a href="contact.html"><i data-lucide="phone" class="w-4 h-4"></i>ติดต่อเรา</a>
+            </div>
           </div>
+
         </nav>
       </div>
     </div>
-    <div id="mobile-nav-panel"
-      class="md:hidden bg-white text-[#1D4699] border-t border-white/10 shadow-lg hidden">
+    <div id="mobile-nav-panel" class="md:hidden bg-white text-[#1D4699] border-t border-white/10 shadow-lg hidden">
       <div class="px-6 py-4 space-y-4 text-sm font-semibold">
         <div class="space-y-1">
           <a href="index.html" class="flex items-center gap-2 py-1">หน้าแรก</a>
@@ -262,10 +476,13 @@
 
   <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-br from-[#e3e9ff] via-white to-[#ffe5d4]">
-    <div class="absolute -top-32 -right-10 h-80 w-80 rounded-full blur-[160px] bg-[#1D4699]/35"></div>
-    <div class="absolute -bottom-40 -left-16 h-80 w-80 rounded-full blur-[160px] bg-[#E89266]/40"></div>
+    <video class="hero-video" src="./assets/video_web.mp4" autoplay muted loop playsinline
+      poster="./assets/banner1.jpg"></video>
+    <div class="hero-overlay"></div>
+    <div class="absolute -top-32 -right-10 h-80 w-80 rounded-full blur-[160px] bg-[#1D4699]/25"></div>
+    <div class="absolute -bottom-40 -left-16 h-80 w-80 rounded-full blur-[160px] bg-[#E89266]/30"></div>
 
-    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24 relative">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24 relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="space-y-6">
           <span class="inline-flex items-center rounded-full px-3 py-1 text-sm text-[#1D4699] bg-white/80 shadow">
@@ -313,7 +530,8 @@
 
         <div class="relative">
 
-          <div class="hero-slider rounded-[40px] overflow-hidden border border-[#cfd8ff] bg-white shadow-xl" data-slider>
+          <div class="hero-slider rounded-[40px] overflow-hidden border border-[#cfd8ff] bg-white shadow-xl"
+            data-slider>
 
             <div class="hero-slider-track" data-slider-track>
 
@@ -337,122 +555,9 @@
 
           </div>
 
-          <div class="absolute -bottom-6 left-6 bg-white rounded-2xl shadow-lg ring-1 ring-[#1D4699]/15 w-64">
-            <div class="p-4">
-              <div class="text-sm font-semibold flex items-center gap-2 text-[#10254F]">
-                <i data-lucide="users" class="w-4 h-4 text-[#E89266]"></i>บริการนิสิตครบวงจร
-              </div>
-              <p class="text-xs text-slate-500 mt-1">แนะแนว ทุนการศึกษา สหกิจ และที่ปรึกษาอาชีพ</p>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="mt-12 max-w-xl">
-        <label class="text-xs uppercase tracking-[0.4em] text-[#1D4699]/60 font-semibold">ค้นหา</label>
-        <div class="mt-2 flex gap-2 items-center bg-white rounded-xl shadow p-2 ring-1 ring-[#1D4699]/10">
-          <input type="text" placeholder="ค้นหาหลักสูตร ข่าว หรือหัวข้อที่ต้องการ"
-            class="h-12 w-full rounded-lg px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4699]/40" />
-          <button
-            class="h-12 inline-flex items-center gap-2 px-4 rounded-lg bg-[#E89266] text-white text-sm font-semibold hover:bg-[#cf7c52]">
-            <i data-lucide="search" class="w-4 h-4"></i>ค้นหา
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Programs -->
-  <section id="programs" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-slate-900">หลักสูตรของเรา</h2>
-        <p class="text-slate-500 mt-2">ครอบคลุมการเรียนรู้ทุกระดับเพื่อสร้างนักสร้างเสริมสุขภาพคุณภาพสูง</p>
-      </div>
-      <div class="grid lg:grid-cols-2 gap-8">
-        <article class="flex flex-col shadow-lg rounded-[30px] overflow-hidden border border-slate-100">
-          <div class="relative bg-[#fef3eb] p-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="flex-1">
-              <p class="text-xs font-semibold text-[#E89266] uppercase tracking-widest">วิทยาศาสตรบัณฑิต</p>
-              <h3 class="text-lg font-semibold text-[#10254F] leading-snug mt-1">สุขศึกษาและส่งเสริมสุขภาพ</h3>
-                
-              <p class="text-sm text-slate-600 mt-3">บูรณาการสุขศึกษา พฤติกรรมศาสตร์ และสื่อสารสุขภาพ
-                พร้อมฝึกปฏิบัติงานกับเครือข่ายภาคสนาม</p>
-              <div class="mt-4 text-xs text-[#1D4699]">ระยะเวลาเรียน 4 ปี (ภาคปกติ)</div>
-            </div>
-            <img src="./assets/images/program/01.jpg" alt="B.Sc." class="w-full md:w-56 rounded-2xl object-cover shadow" />
-          </div>
-          <div class="flex items-center justify-between px-6 py-4 bg-white">
-            <span class="text-sm text-[#E89266]">หลักสูตรระดับปริญญาตรี</span>
-            <a href="program/B.Sc. (Public Health).html" class="text-[#1D4699] text-sm font-semibold flex items-center gap-1">ดูรายละเอียด
-              <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-          </div>
-        </article>
-
-
-        <article class="flex flex-col shadow-lg rounded-[30px] overflow-hidden border border-slate-100">
-          <div class="relative bg-[#fef3eb] p-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="flex-1">
-              <p class="text-xs font-semibold text-[#E89266] uppercase tracking-widest">วิทยาศาสตรมหาบัณฑิต</p>
-              <h3 class="text-lg font-semibold text-[#10254F] leading-snug mt-1">สุขศึกษาและพฤติกรรมศาสตร์</h3>
-                
-              <p class="text-sm text-slate-600 mt-3">เน้นการวิจัย การออกแบบนวัตกรรมสุขภาพ
-                และการประเมินผลโครงการในระดับประเทศ</p>
-              <div class="mt-4 text-xs text-[#1D4699]">มีทั้งหลักสูตรแผน ก. และแผน ข.</div>
-            </div>
-            <img src="./assets/images/program/03.jpg" alt="M.Sc." class="w-full md:w-56 rounded-2xl object-cover shadow" />
-          </div>
-          <div class="flex items-center justify-between px-6 py-4 bg-white">
-            <span class="text-sm text-[#E89266]">หลักสูตรระดับปริญญาโท</span>
-            <a href="https://graduate.mahidol.ac.th/thai/prospective-students/?p=curriculum&id=2314M04S" target="_blank"
-              class="text-[#1D4699] text-sm font-semibold flex items-center gap-1">ดูรายละเอียด
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-          </div>
-        </article>
-
-
-        <article class="flex flex-col shadow-lg rounded-[30px] overflow-hidden border border-slate-100">
-          <div class="relative bg-[#fef3eb] p-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="flex-1">
-              <p class="text-xs font-semibold text-[#E89266] uppercase tracking-widest">วิทยาศาสตรบัณฑิต</p>
-              <h3 class="text-lg font-semibold text-[#10254F] leading-snug mt-1">สุขศึกษาและพฤติกรรมศาสตร์</h3>
-              <h3 class="text-lg font-semibold text-[#10254F] leading-snug mt-1">(ภาคพิเศษ)</h3>
-              <p class="text-sm text-slate-600 mt-3">พัฒนานักวิชาชีพสุขภาพให้ทันสมัย
-                เน้นการประเมินโครงการและการจัดการสุขภาวะในชุมชน</p>
-              <div class="mt-4 text-xs text-[#1D4699]">เลือกเรียนแบบภาคค่ำหรือวันหยุด</div>
-            </div>
-            <img src="./assets/images/program/02.jpg" alt="B.Sc. Special"
-              class="w-full md:w-56 rounded-2xl object-cover shadow" />
-          </div>
-          <div class="flex items-center justify-between px-6 py-4 bg-white">
-            <span class="text-sm text-[#E89266]">หลักสูตรระดับปริญญาโท</span>
-            <a href="https://graduate.mahidol.ac.th/thai/prospective-students/?p=curriculum&id=2314M03G" target="_blank"
-              class="text-[#1D4699] text-sm font-semibold flex items-center gap-1">ดูรายละเอียด
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-          </div>
-        </article>
-
-        
-
-        <article class="flex flex-col shadow-lg rounded-[30px] overflow-hidden border border-slate-100">
-          <div class="relative bg-[#fef3eb] p-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="flex-1">
-              <p class="text-xs font-semibold text-[#E89266] uppercase tracking-widest">ปรัชญาดุษฎีบัณฑิต</p>
-              <h3 class="text-lg font-semibold text-[#10254F] leading-snug mt-1">การสร้างเสริมสุขภาพ</h3>
-              <p class="text-sm text-slate-600 mt-3">สร้างผู้นำการเปลี่ยนแปลงเชิงนโยบาย
-                และนักวิจัยที่เชื่อมงานกับชุมชน</p>
-              <div class="mt-4 text-xs text-[#1D4699]">ที่ปรึกษาร่วมสหวิทยาการ</div>
-            </div>
-            <img src="./assets/images/program/04.jpg" alt="Ph.D." class="w-full md:w-56 rounded-2xl object-cover shadow" />
-          </div>
-          <div class="flex items-center justify-between px-6 py-4 bg-white">
-            <span class="text-sm text-[#E89266]">หลักสูตรระดับปริญญาเอก</span>
-            <a href="https://graduate.mahidol.ac.th/Admission/announce/announce.php?id=2329DG05&y=2565" target="_blank"
-              class="text-[#1D4699] text-sm font-semibold flex items-center gap-1">ดูรายละเอียด
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -470,96 +575,122 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 mt-8">
-      <a href="news.html" class="inline-flex items-center gap-2 text-[#1D4699] font-semibold hover:text-[#10254F]">ดูข่าว/ประกาศทั้งหมด
+      <a href="news.html"
+        class="inline-flex items-center gap-2 text-[#1D4699] font-semibold hover:text-[#10254F]">ดูข่าว/ประกาศทั้งหมด
         <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
     </div>
   </section>
 
-  <!-- Events -->
-  <section id="events" class="py-14 md:py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 mb-8">
-      <div class="flex items-end gap-3">
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-blue-800">ปฏิทินกิจกรรม</h2>
-        <span class="rounded-full bg-[#E89266] text-white text-xs px-3 py-1">กำหนดการสำคัญ</span>
-      </div>
-      <div class="h-1.5 w-24 mt-3 rounded-full bg-gradient-to-r from-blue-500 to-orange-400"></div>
+  <!-- PROGRAM LIST -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 mb-6">
+      <p class="text-xs uppercase tracking-[0.35em] text-blue-500">Programs Overview</p>
+      <h3 class="text-2xl font-bold text-slate-900 mt-1">หลักสูตรที่เปิดสอนในภาควิชา</h3>
     </div>
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
-      <div class="rounded-xl bg-white border-0 ring-1 ring-slate-200">
-        <div class="p-5">
-          <div class="text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5"></i>17
-            ส.ค. 2567</div>
-          <div class="mt-1 font-semibold">ปฐมนิเทศนักศึกษาใหม่</div>
-          <div class="mt-2 text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="map-pin"
-              class="w-3.5 h-3.5"></i>อาคารสัมมนาใหญ่</div>
-          <div class="mt-1 text-xs text-[#C9DAFF]">เวลา 08:00 น.</div>
-          <div class="mt-4"><a
-              class="inline-flex items-center justify-center h-9 px-3 rounded-md border text-sm hover:bg-slate-50"
-              href="#">เพิ่มลงปฏิทิน</a></div>
+
+    <div class="program-list">
+
+      <!-- BACHELOR NORMAL -->
+      <article
+        class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+        <div class="program-card-inner">
+          <div class="stand-scene">
+            <div class="stand-figure">
+              <span aria-hidden="true" class="stand-shadow"></span>
+              <img alt="นักศึกษาปริญญาตรี" class="stand-image base-state" src="./assets/stand_model/1.png" />
+              <img alt="บัณฑิตปริญญาตรี" class="stand-image hover-state" src="./assets/stand_model/2.png" />
+            </div>
+          </div>
+          <div class="program-content flex flex-col">
+            <span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาตรี</span>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรบัณฑิต (สาธารณสุขศาสตร์)</h4>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ </h4>
+
+            <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+              <span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาเรียน 4
+                ปี</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="rounded-xl bg-white border-0 ring-1 ring-slate-200">
-        <div class="p-5">
-          <div class="text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5"></i>1
-            ก.ย. 2567</div>
-          <div class="mt-1 font-semibold">เปิดภาคการศึกษา 1/2567</div>
-          <div class="mt-2 text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="map-pin"
-              class="w-3.5 h-3.5"></i>มหาวิทยาลัย</div>
-          <div class="mt-1 text-xs text-[#C9DAFF]">เวลา —</div>
-          <div class="mt-4"><a
-              class="inline-flex items-center justify-center h-9 px-3 rounded-md border text-sm hover:bg-slate-50"
-              href="#">เพิ่มลงปฏิทิน</a></div>
+      </article>
+
+      <!-- BACHELOR SPECIAL -->
+      <article
+        class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+        <div class="program-card-inner">
+          <div class="stand-scene">
+            <div class="stand-figure">
+              <span aria-hidden="true" class="stand-shadow"></span>
+              <img alt="นักศึกษาปริญญาตรีต่อเนื่อง" class="stand-image base-state" src="./assets/stand_model/3.png" />
+              <img alt="บัณฑิตปริญญาตรีต่อเนื่อง" class="stand-image hover-state" src="./assets/stand_model/4.png" />
+            </div>
+          </div>
+          <div class="program-content flex flex-col">
+            <span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาโท</span>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรมหาบัณฑิต </h4>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ </h4>
+
+            <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+              <span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาโดยประมาณ 2
+                ปี</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="rounded-xl bg-white border-0 ring-1 ring-slate-200">
-        <div class="p-5">
-          <div class="text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5"></i>15
-            ก.ย. 2567</div>
-          <div class="mt-1 font-semibold">ปิดรับสมัครทุนการศึกษา</div>
-          <div class="mt-2 text-xs text-[#C9DAFF] flex items-center gap-2"><i data-lucide="map-pin"
-              class="w-3.5 h-3.5"></i>งานกิจการนิสิต</div>
-          <div class="mt-1 text-xs text-[#C9DAFF]">เวลา 16:30 น.</div>
-          <div class="mt-4"><a
-              class="inline-flex items-center justify-center h-9 px-3 rounded-md border text-sm hover:bg-slate-50"
-              href="#">เพิ่มลงปฏิทิน</a></div>
+      </article>
+
+      <!-- MASTER -->
+      <article
+        class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+        <div class="program-card-inner">
+          <div class="stand-scene">
+            <div class="stand-figure">
+              <span aria-hidden="true" class="stand-shadow"></span>
+              <img alt="นักศึกษาปริญญาโท" class="stand-image base-state" src="./assets/stand_model/5.png" />
+              <img alt="บัณฑิตปริญญาโท" class="stand-image hover-state" src="./assets/stand_model/6.png" />
+            </div>
+          </div>
+          <div class="program-content flex flex-col">
+            <span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาโท </span>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรวิทยาศาสตรมหาบัณฑิต </h4>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">สาขาวิชา สุขศึกษาและส่งเสริมสุขภาพ (ภาคพิเศษ) </h4>
+
+            <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+              <span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาโดยประมาณ 2
+                ปี</span>
+            </div>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <!-- DOCTORAL -->
+      <article
+        class="program-card rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition group">
+        <div class="program-card-inner">
+          <div class="stand-scene">
+            <div class="stand-figure">
+              <span aria-hidden="true" class="stand-shadow"></span>
+              <img alt="นักศึกษาปริญญาเอก" class="stand-image base-state" src="./assets/stand_model/7.png" />
+              <img alt="ดุษฎีบัณฑิต" class="stand-image hover-state" src="./assets/stand_model/8.png" />
+            </div>
+          </div>
+          <div class="program-content flex flex-col">
+            <span class="text-xs font-semibold uppercase tracking-widest text-orange-500">หลักสูตรระดับปริญญาเอก</span>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">หลักสูตรสาธารณสุขศาสตรดุษฎีบัณฑิต</h4>
+            <h4 class="mt-2 text-lg font-semibold text-slate-900">(หลักสูตรนานาชาติ)</h4>
+            <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+              <span class="flex items-center gap-1"><i class="w-4 h-4" data-lucide="clock-4"></i>ระยะเวลาเรียน 1
+                ปี</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="py-16">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-      <div class="bg-[#1D4699] text-white rounded-[32px] p-8 shadow-xl">
-        <div class="max-w-6xl mx-auto mb-8">
-          <div class="flex items-end gap-3">
-            <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white">ทำไมต้องที่นี่?</h2>
-            <span class="rounded-full bg-[#E89266] text-white text-xs px-3 py-1">สังคมสุขภาวะ</span>
-          </div>
-          <div class="h-1.5 w-24 mt-3 rounded-full bg-gradient-to-r from-blue-500 to-orange-400"></div>
-        </div>
-        <ul class="space-y-3 text-white/90">
-          <li class="flex gap-3"><span class="mt-1 text-[#E89266]">•</span> หลักสูตรเน้นปฏิบัติจริง
-            ร่วมมือกับชุมชนและหน่วยงานภาคี</li>
-          <li class="flex gap-3"><span class="mt-1 text-[#E89266]">•</span> ที่ปรึกษาใกล้ชิด โครงงาน/วิจัยเชิงปฏิบัติการตั้งแต่ปี
-            2</li>
-          <li class="flex gap-3"><span class="mt-1 text-[#E89266]">•</span> โครงสร้างพื้นฐานดิจิทัล ห้องสตูดิโอสื่อสารสุขภาพ
-          </li>
-          <li class="flex gap-3"><span class="mt-1 text-[#E89266]">•</span> โอกาสทุนการศึกษาและแลกเปลี่ยนต่างประเทศ</li>
-        </ul>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="rounded-2xl overflow-hidden ring-1 ring-slate-200"><img src="./assets/images/about-1.jpg"
-            class="h-full w-full object-cover" alt="ภาพบรรยากาศ 1" /></div>
-        <div class="rounded-2xl overflow-hidden ring-1 ring-slate-200"><img src="./assets/images/about-2.jpg"
-            class="h-full w-full object-cover" alt="ภาพบรรยากาศ 2" /></div>
-        <div class="rounded-2xl overflow-hidden ring-1 ring-slate-200"><img src="./assets/images/about-3.jpg"
-            class="h-full w-full object-cover" alt="ภาพบรรยากาศ 3" /></div>
-        <div class="rounded-2xl overflow-hidden ring-1 ring-slate-200"><img src="./assets/images/about-4.jpg"
-            class="h-full w-full object-cover" alt="ภาพบรรยากาศ 4" /></div>
-      </div>
-    </div>
-  </section>
+
+
+
 
   <!-- Partners (inspired by original index) -->
   <section class="py-12 bg-white">
@@ -636,11 +767,24 @@
   <!-- News modal -->
   <div id="news-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
     <div class="bg-white rounded-xl max-w-3xl w-full mx-4 p-6 shadow-xl relative max-h-[90vh] overflow-y-auto">
-      <button id="news-modal-close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600" aria-label="???">?</button>
+      <button id="news-modal-close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600"
+        aria-label="ปิดหน้าต่างข่าว">ปิด</button>
       <div class="text-xs text-[#1D4699] mb-1" id="news-modal-tag"></div>
       <h3 class="text-lg font-semibold" id="news-modal-title"></h3>
       <div class="text-xs text-slate-500 mt-1 mb-3" id="news-modal-date"></div>
-      <div id="news-modal-gallery" class="space-y-3 hidden"></div>
+      <div id="news-modal-gallery" class="hidden">
+        <div class="relative">
+          <div class="overflow-hidden rounded-lg bg-slate-100" data-gallery-viewport>
+            <div class="flex transition-transform duration-300 ease-in-out" data-gallery-track></div>
+          </div>
+          <button type="button" class="modal-gallery-nav" data-gallery-dir="prev" aria-label="ดูภาพก่อนหน้า">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </button>
+          <button type="button" class="modal-gallery-nav" data-gallery-dir="next" aria-label="ดูภาพถัดไป">
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
       <div class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap" id="news-modal-body"></div>
       <div class="flex flex-wrap gap-2 mt-4 hidden" id="news-modal-links"></div>
     </div>
@@ -711,6 +855,11 @@
       const modalGallery = document.getElementById('news-modal-gallery');
       const modalLinks = document.getElementById('news-modal-links');
       const closeBtn = document.getElementById('news-modal-close');
+      const galleryViewport = document.querySelector('#news-modal-gallery [data-gallery-viewport]');
+      const galleryTrack = document.querySelector('#news-modal-gallery [data-gallery-track]');
+      const galleryButtons = document.querySelectorAll('#news-modal-gallery button[data-gallery-dir]');
+      let galleryIndex = 0;
+      let galleryTotal = 0;
 
       function normalizeLinks(list = []) {
         if (!Array.isArray(list)) return [];
@@ -718,33 +867,60 @@
           .map((item, idx) => {
             if (!item) return null;
             if (typeof item === 'string') {
-              return { label: `??????????? ${idx + 1}`, url: item };
+              return { label: `ลิงก์เพิ่มเติม ${idx + 1}`, url: item };
             }
             if (item.url) {
-              return { label: item.label || `??????????? ${idx + 1}`, url: item.url };
+              return { label: item.label || `ลิงก์เพิ่มเติม ${idx + 1}`, url: item.url };
             }
             return null;
           })
           .filter(Boolean);
       }
 
+      function updateGalleryPosition() {
+        if (!galleryTrack) return;
+        galleryTrack.style.transform = `translateX(-${galleryIndex * 100}%)`;
+        galleryButtons.forEach((btn) => {
+          if (galleryTotal <= 1) {
+            btn.classList.add('hidden');
+          } else {
+            btn.classList.remove('hidden');
+          }
+        });
+      }
+
       function renderGallery(images = []) {
-        if (!modalGallery) return;
-        modalGallery.innerHTML = '';
+        if (!modalGallery || !galleryTrack || !galleryViewport) return;
         const list = Array.isArray(images) ? images.filter(Boolean) : [];
         if (!list.length) {
           modalGallery.classList.add('hidden');
+          galleryTrack.innerHTML = '';
+          galleryTotal = 0;
           return;
         }
         modalGallery.classList.remove('hidden');
-        list.forEach((src) => {
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = 'news image';
-          img.className = 'w-full rounded-lg object-contain bg-slate-100 max-h-[60vh]';
-          modalGallery.appendChild(img);
-        });
+        galleryTrack.innerHTML = list
+          .map(
+            (src) => `
+            <div class="min-w-full flex justify-center">
+              <img src="${src}" alt="news image" class="w-full object-contain bg-slate-100 max-h-[60vh] rounded-lg"/>
+            </div>
+          `,
+          )
+          .join('');
+        galleryTotal = list.length;
+        galleryIndex = 0;
+        updateGalleryPosition();
       }
+
+      galleryButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!galleryTotal) return;
+          const dir = btn.dataset.galleryDir === 'next' ? 1 : -1;
+          galleryIndex = (galleryIndex + dir + galleryTotal) % galleryTotal;
+          updateGalleryPosition();
+        });
+      });
 
       function renderLinks(links = []) {
         if (!modalLinks) return;
@@ -797,7 +973,7 @@
         try {
           return JSON.parse(decodeURIComponent(value));
         } catch (error) {
-          console.warn('??????????????????????????????????????', error);
+          console.warn('เกิดข้อผิดพลาดระหว่างแปลงข้อมูลลิงก์', error);
           return [];
         }
       };
@@ -821,7 +997,7 @@
         const container = document.getElementById('home-news-list');
         if (!container) return;
         if (!items.length) {
-          container.innerHTML = '<p class="text-sm text-slate-500">??????????????????/?????? ???????????????????? news.json</p>';
+          container.innerHTML = '<p class="text-sm text-slate-500">ไม่พบข้อมูลข่าว/กิจกรรม กรุณาตรวจสอบไฟล์ news.json</p>';
           return;
         }
 
@@ -833,33 +1009,33 @@
             const images = Array.isArray(n.images) && n.images.length
               ? n.images.filter(Boolean)
               : n.image
-              ? [n.image]
-              : [];
+                ? [n.image]
+                : [];
             const primaryImage = images[0] || './assets/images/img/error_load_picture.jpg';
             const links = Array.isArray(n.links)
               ? n.links
               : n.link
-              ? [{ label: n.linkLabel || '???????????', url: n.link }]
-              : [];
+                ? [{ label: n.linkLabel || 'ลิงก์เพิ่มเติม', url: n.link }]
+                : [];
             return `
             <article class="rounded-xl overflow-hidden shadow hover:shadow-xl transition-shadow bg-white cursor-pointer"
-              data-title="${safe(n.title || '????/??????/???????')}"
+              data-title="${safe(n.title || 'ยังไม่ระบุหัวข้อ')}"
               data-date="${safe(n.date || '-')}"
-              data-tag="${safe(n.tag || '????/??????')}"
-              data-body="${safe(n.body || n.summary || '???????????????????????????')}"
+              data-tag="${safe(n.tag || 'ไม่ระบุหมวดหมู่')}"
+              data-body="${safe(n.body || n.summary || 'ไม่มีรายละเอียดเพิ่มเติม')}"
               data-images="${encodeList(images)}"
               data-links="${encodeList(links)}">
               <img src="${primaryImage}" alt="news" class="h-44 w-full object-cover"/>
               <div class="p-5">
                 <div class="flex items-center gap-2 text-xs text-[#C9DAFF]">
-                  <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5">${n.tag || '????/??????'}</span>
+                  <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5">${n.tag || 'ไม่ระบุหมวดหมู่'}</span>
                   <span class="flex items-center gap-1"><i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>${n.date || '-'}</span>
                 </div>
-                <h3 class="mt-2 font-semibold leading-snug">${n.title || '????/??????/???????'}</h3>
+                <h3 class="mt-2 font-semibold leading-snug">${n.title || 'ยังไม่ระบุหัวข้อ'}</h3>
                 <div class="mt-3 flex items-center justify-between">
-                  <span class="text-xs text-[#C9DAFF]">${n.by ? `??? ${n.by}` : ''}</span>
+                  <span class="text-xs text-[#C9DAFF]">${n.by ? `โดย ${n.by}` : ''}</span>
                   <span class="text-sm inline-flex items-center gap-1 text-[#1D4699] hover:text-[#10254F]">
-                    ?????????????? <i data-lucide="external-link" class="w-4 h-4"></i>
+                    อ่านรายละเอียด <i data-lucide="external-link" class="w-4 h-4"></i>
                   </span>
                 </div>
               </div>

@@ -99,6 +99,36 @@
       background: rgba(15, 23, 42, 0.04);
       opacity: 1;
     }
+
+    .modal-gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 999px;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d4699;
+      box-shadow: 0 10px 25px rgba(16, 37, 79, 0.2);
+      opacity: 0.9;
+    }
+
+    .modal-gallery-nav:hover {
+      background: #fff;
+      opacity: 1;
+    }
+
+    .modal-gallery-nav[data-gallery-dir="prev"] {
+      left: 0.5rem;
+    }
+
+    .modal-gallery-nav[data-gallery-dir="next"] {
+      right: 0.5rem;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900"> <!-- Navigation -->
@@ -246,7 +276,19 @@
 <div class="text-xs text-blue-500 mb-1" id="news-modal-tag"></div>
 <h3 class="text-lg font-semibold" id="news-modal-title"></h3>
 <div class="text-xs text-slate-500 mt-1 mb-3" id="news-modal-date"></div>
-<div class="space-y-3 hidden" id="news-modal-gallery"></div>
+<div class="hidden" id="news-modal-gallery">
+  <div class="relative">
+    <div class="overflow-hidden rounded-lg bg-slate-100" data-gallery-viewport>
+      <div class="flex transition-transform duration-300 ease-in-out" data-gallery-track></div>
+    </div>
+    <button type="button" class="modal-gallery-nav" data-gallery-dir="prev" aria-label="ภาพก่อนหน้า">
+      <i data-lucide="arrow-left" class="w-5 h-5"></i>
+    </button>
+    <button type="button" class="modal-gallery-nav" data-gallery-dir="next" aria-label="ภาพถัดไป">
+      <i data-lucide="arrow-right" class="w-5 h-5"></i>
+    </button>
+  </div>
+</div>
 <div class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap" id="news-modal-body"></div>
 <div class="flex flex-wrap gap-2 mt-4 hidden" id="news-modal-links"></div>
 </div>
@@ -261,6 +303,11 @@
       const modalGallery = document.getElementById('news-modal-gallery');
       const modalLinks = document.getElementById('news-modal-links');
       const closeBtn = document.getElementById('news-modal-close');
+      const galleryViewport = modalGallery ? modalGallery.querySelector('[data-gallery-viewport]') : null;
+      const galleryTrack = modalGallery ? modalGallery.querySelector('[data-gallery-track]') : null;
+      const galleryButtons = modalGallery ? modalGallery.querySelectorAll('button[data-gallery-dir]') : [];
+      let galleryIndex = 0;
+      let galleryTotal = 0;
 
       function normalizeLinks(list = []) {
         if (!Array.isArray(list)) return [];
@@ -278,23 +325,50 @@
           .filter(Boolean);
       }
 
+      function updateGalleryPosition() {
+        if (!galleryTrack) return;
+        galleryTrack.style.transform = `translateX(-${galleryIndex * 100}%)`;
+        galleryButtons.forEach((btn) => {
+          if (galleryTotal <= 1) {
+            btn.classList.add('hidden');
+          } else {
+            btn.classList.remove('hidden');
+          }
+        });
+      }
+
       function renderGallery(images = []) {
-        if (!modalGallery) return;
-        modalGallery.innerHTML = '';
+        if (!modalGallery || !galleryTrack || !galleryViewport) return;
         const list = Array.isArray(images) ? images.filter(Boolean) : [];
         if (!list.length) {
           modalGallery.classList.add('hidden');
+          galleryTrack.innerHTML = '';
+          galleryTotal = 0;
           return;
         }
         modalGallery.classList.remove('hidden');
-        list.forEach((src) => {
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = 'news image';
-          img.className = 'w-full rounded-lg object-contain bg-slate-100 max-h-[60vh]';
-          modalGallery.appendChild(img);
-        });
+        galleryTrack.innerHTML = list
+          .map(
+            (src) => `
+            <div class="min-w-full flex justify-center">
+              <img src="${src}" alt="news image" class="w-full object-contain bg-slate-100 max-h-[60vh] rounded-lg"/>
+            </div>
+          `,
+          )
+          .join('');
+        galleryTotal = list.length;
+        galleryIndex = 0;
+        updateGalleryPosition();
       }
+
+      galleryButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!galleryTotal) return;
+          const dir = btn.dataset.galleryDir === 'next' ? 1 : -1;
+          galleryIndex = (galleryIndex + dir + galleryTotal) % galleryTotal;
+          updateGalleryPosition();
+        });
+      });
 
       function renderLinks(links = []) {
         if (!modalLinks) return;
